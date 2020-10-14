@@ -20,14 +20,15 @@ def initial_checker():
             with open(f, 'w') as f:
                 pass
         print("""
-        selamat datang""")
+        Selamat Datang!""")
         setting_input()
         print("""
-        anda bisa menambahkan hashtag database, competitor database,
-        whitelists, blacklists dan juga bisa menambahkan user pengguna di menu setting.
-        Have fun with the bot!
+        
+You can add a hashtag database, competitor database,
+        whitelists, blacklists and can also add some users in the settings menu
+        Have fun with this bot! :)
         """)
-        time.sleep(5)
+        time.sleep(8)
         os.system('cls')
 
 
@@ -42,13 +43,13 @@ def read_input(f, msg, n=None):
 
 
 def setting_input():
-    inputs = [("berapa banyak like yang kamu butuhkan?", 1000),
-              ("bagaimana kalau unlike? ", 1000),
-              ("berapa banyak komentar yang anda inginkan per hari? ", 100),
+    inputs = [("berapa banyak like yang kamu butuhkan?", 900),
+              ("bagaimana kalau unlike? ", 900),
+              ("berapa banyak komentar yang anda inginkan per hari? ", 50),
               (("Maximal likes in media you will like?\n"
-                "kita akan skip jika jumlah like lebih besar dari inlai "), 100),
-              ("kasih delay/detik per satu like agar tidak di curigai ", 10),
-              ("kasih delay/detik per unlike agar tidak di curigai ", 10)]
+                "kita akan skip jika jumlah like lebih besar dari inlai "), 90),
+              ("kasih delay/detik per satu like agar tidak di curigai ", 20),
+              ("kasih delay/detik per unlike agar tidak di curigai ", 20)]
     
     with open(setting, "w") as f:
         while True:
@@ -74,20 +75,20 @@ def parameter_setting():
 
 def username_adder():
     with open(SECRET_FILE, "a") as f:
-        print("kami butuh akun ig kalian.")
-        print("jangan kawatir penyimpanan lokal di perangkat anda saja.")
+        print("kami butuh username dan password ig kalian.")
+        print("jangan takut dan kawatir penyimpanan lokal di perangkat anda saja.")
         while True:
             print("Enter your username: ")
             f.write(str(sys.stdin.readline().strip()) + ":")
             print("Enter your password: (it will not be shown due to security reasons - just start typing and press Enter)")
             f.write(getpass.getpass() + "\n")
-            print("mau masukan akun lagi? (y/n)")
+            print("apakah mau masukan akun lagi? (y/n)")
             if "y" not in sys.stdin.readline():
                 break
 
 def get_adder(name, fname):
     def _adder():
-        print("Database yang sudah di buat:")
+        print("Database yang sudah kamu buat:")
         print(bot.read_list_from_file(fname))
         with open(fname, "a") as f:
             print('Add {} to database'.format(name))
@@ -131,13 +132,13 @@ def menu():
         print("""[1].Like""")
         print("""[2].setting""")
         print("===============================================")
-        ans = input("masukan angka yang anda inginkan\n").strip()
+        ans = input("silahkan kamu masukan angka yang anda inginkan\n").strip()
         if ans == "1":
             menu_like()
         elif ans == "2":
             menu_setting()
         else:
-            print("\n masukan anda salah")
+            print("\n input yang anda masukkan sepertinya salah")
 
 def menu_like():
     ans = True
@@ -152,7 +153,7 @@ def menu_like():
         6. Main menu
         """)
         print("===================================================")
-        ans = input("bagaimana cara Like yang ingin anda lakukan?\n").strip()
+        ans = input("bagaimanakah cara Like yang ingin anda lakukan?\n").strip()
 
         if ans == "1":
             print("""
@@ -162,7 +163,7 @@ def menu_like():
             hashtags = []
             if "1" in sys.stdin.readline():
                 print("==========================================================================================")
-                hashtags = input("masukan hastag yang di inginkan\ncontoh: kucing indonesia\nmasukan hastag?\n").strip().split(' ')
+                hashtags = input("silahkan kamu masukkan hastag yang kamu inginkan\ncontoh: kucing indonesia\nmasukan hastag?\n").strip().split(' ')
                 print("==========================================================================================")
             else:
                 hashtags.append(random.choice(bot.read_list_from_file(hashtag_file)))
@@ -175,7 +176,7 @@ def menu_like():
             2.gunakan username database
             """)
             if "1" in sys.stdin.readline():
-                user_id = input("siapa username nya?\n").strip()
+                user_id = input("silahkan kau isi username nya?\n").strip()
             else:
                 user_id = random.choice(bot.read_list_from_file(users_file))
             bot.like_followers(user_id)
@@ -186,7 +187,7 @@ def menu_like():
             2.gunakan username database
             """)
             if "1" in sys.stdin.readline():
-                user_id = input("siapa username nya?\n").strip()
+                user_id = input("silahkan kamu isi username nya?\n").strip()
             else:
                 user_id = random.choice(bot.read_list_from_file(users_file))
             bot.like_following(user_id)
@@ -197,7 +198,7 @@ def menu_like():
             2.gunakan username database
             """)
             if "1" in sys.stdin.readline():
-                user_id = input("siapa username nya?\n").strip()
+                user_id = input("silahkan kamu isi username nya?\n").strip()
             else:
                 user_id = random.choice(bot.read_list_from_file(users_file))
             medias = bot.get_user_medias(user_id, filtration=False)
@@ -213,7 +214,7 @@ def menu_like():
             menu()
 
         else:
-            print("nomor yang anda masukan salah")
+            print("nomor yang barusan kamu masukan salah")
             menu_like()
 
 def menu_setting():
@@ -229,11 +230,11 @@ def menu_setting():
         7. Clear all database
         8. Main menu
         """)
-        ans = input("settingan apakah yang ingin anda rubah?\n").strip()
+        ans = input("pengaturan seperti apakah yang ingin kalian rubah???\n").strip()
 
         if ans == "1":
             parameter_setting()
-            change = input("beneran mau di ganti? y/n\n").strip()
+            change = input("yakin beneran mau kamu ganti? y/n\n").strip()
             if change == 'y' or change == 'Y':
                 setting_input()
             else:
@@ -250,17 +251,17 @@ def menu_setting():
             whitelist_adder()
         elif ans == "7":
             print(
-                "semua setingan sudah di bersihkan/di reset ulang")
+                "semua pengaturan sudah di bersihkan atau di reset seperti awal")
             time.sleep(5)
             open(hashtag_file, 'w')
             open(users_file, 'w')
             open(whitelist, 'w')
             open(blacklist, 'w')
-            print("selesai, anda bisa memasukan nya lagi!")
+            print("sudah selesai, sekarang anda bisa memasukan nya lagi!")
         elif ans == "8":
             menu()
         else:
-            print("nomor tidak ada di list?")
+            print("apakah nomor tidak ada di list?")
             menu_setting()
 
 # untuk mencocokan input
@@ -282,8 +283,8 @@ SECRET_FILE = "secret.txt"
 initial_checker()
 
 if os.stat(setting).st_size == 0:
-    print("terlihat like rusak")
-    print("yuk bikin baru")
+    print("sepertinya terlihat like rusak")
+    print("silahkan kamu bikin baru")
     setting_input()
 f = open(setting)
 lines = f.readlines()
@@ -312,6 +313,11 @@ bot = Bot(
         'vector',
         'karikatur',
         'jasa',
+        'jual',
+        'beli',
+        'sewa',
+        'jastip',
+        'art',
         'open'])
 
 bot.login()
@@ -323,3 +329,5 @@ while True:
         bot.logger.info("error, read exception bellow")
         bot.logger.info(str(e))
     time.sleep(1)
+
+    #this is my changes
