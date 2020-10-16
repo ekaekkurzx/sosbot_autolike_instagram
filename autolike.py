@@ -20,15 +20,15 @@ def initial_checker():
             with open(f, 'w') as f:
                 pass
         print("""
-        Selamat Datang!""")
+        Selamat Datang di web kami!""")
         setting_input()
         print("""
         
 You can add a hashtag database, competitor database,
         whitelists, blacklists and can also add some users in the settings menu
-        Have fun with this bot! :)
+        Have fun with this bot! jangan lupa share ke teman teman kalian agar semua bisa menikmati fitur ini :)
         """)
-        time.sleep(8)
+        time.sleep(10)
         os.system('cls')
 
 
@@ -43,20 +43,20 @@ def read_input(f, msg, n=None):
 
 
 def setting_input():
-    inputs = [("berapa banyak like yang kamu butuhkan?", 900),
-              ("bagaimana kalau unlike? ", 900),
-              ("berapa banyak komentar yang anda inginkan per hari? ", 50),
+    inputs = [("mau berapa banyak like yang kamu butuhkan?", 1000),
+              ("bagaimana jika kalau unlike? ", 1000),
+              ("berapa banyak komentar yang anda inginkan per hari? ", 100),
               (("Maximal likes in media you will like?\n"
-                "kita akan skip jika jumlah like lebih besar dari inlai "), 90),
-              ("kasih delay/detik per satu like agar tidak di curigai ", 20),
-              ("kasih delay/detik per unlike agar tidak di curigai ", 20)]
+                "kita akan skip jika jumlah like lebih besar dari inlai "), 100),
+              ("kasih delay/detik per satu like agar tidak di curigai ", 100),
+              ("kasih delay/detik per unlike agar tidak di curigai ", 100)]
     
     with open(setting, "w") as f:
         while True:
             for msg, n in inputs:
                 read_input(f, msg, n)
             break
-        print("Done with all settings!")
+        print("Done with all settings! have fun with this bot :)")
 
 def parameter_setting():
     settings = ["Max likes per day: ",
@@ -75,20 +75,20 @@ def parameter_setting():
 
 def username_adder():
     with open(SECRET_FILE, "a") as f:
-        print("kami butuh username dan password ig kalian.")
-        print("jangan takut dan kawatir penyimpanan lokal di perangkat anda saja.")
+        print("kami membutuhkan username dan password ig kalian.")
+        print("janganlah kamu takut dan khawatir penyimpanan lokal di perangkat anda saja.")
         while True:
             print("Enter your username: ")
             f.write(str(sys.stdin.readline().strip()) + ":")
             print("Enter your password: (it will not be shown due to security reasons - just start typing and press Enter)")
             f.write(getpass.getpass() + "\n")
-            print("apakah mau masukan akun lagi? (y/n)")
+            print("apakah kamu mau memasukan akun lain lagi? (y/n)")
             if "y" not in sys.stdin.readline():
                 break
 
 def get_adder(name, fname):
     def _adder():
-        print("Database yang sudah kamu buat:")
+        print("Database yang sudah kamu buat barusan:")
         print(bot.read_list_from_file(fname))
         with open(fname, "a") as f:
             print('Add {} to database'.format(name))
@@ -132,28 +132,28 @@ def menu():
         print("""[1].Like""")
         print("""[2].setting""")
         print("===============================================")
-        ans = input("silahkan kamu masukan angka yang anda inginkan\n").strip()
+        ans = input("silahkan kamu masukan angka berapa saja yang anda inginkan\n").strip()
         if ans == "1":
             menu_like()
         elif ans == "2":
             menu_setting()
         else:
-            print("\n input yang anda masukkan sepertinya salah")
+            print("\n input yang tadi anda masukkan sepertinya salah pada sistem kami")
 
 def menu_like():
     ans = True
     while ans:
         print("===================================================")
         print("""
-        1. Like dari masukan hastag
-        2. Like postingan pengikut dari si pengikut
-        3. Like postingan yg di ikuti
-        4. Like dari media sebelumnya
+        1. Like dari masukan hastag yang kamu masukkan
+        2. Like postingan pengikut dari si pengikut yang kamu input
+        3. Like postingan yg di ikuti tadi
+        4. Like dari media sebelumnya yang kamu input
         5. Like dengan gariswaktu anda
         6. Main menu
         """)
         print("===================================================")
-        ans = input("bagaimanakah cara Like yang ingin anda lakukan?\n").strip()
+        ans = input("bagaimanakah cara dari Like yang ingin anda lakukan?\n").strip()
 
         if ans == "1":
             print("""
@@ -163,7 +163,7 @@ def menu_like():
             hashtags = []
             if "1" in sys.stdin.readline():
                 print("==========================================================================================")
-                hashtags = input("silahkan kamu masukkan hastag yang kamu inginkan\ncontoh: kucing indonesia\nmasukan hastag?\n").strip().split(' ')
+                hashtags = input("silahkan kamu masukkan beberapa hastag yang kamu inginkan\ncontoh: hypebeast,viral,hype,tiktok\nmasukan hastag?\n").strip().split(' ')
                 print("==========================================================================================")
             else:
                 hashtags.append(random.choice(bot.read_list_from_file(hashtag_file)))
@@ -176,7 +176,7 @@ def menu_like():
             2.gunakan username database
             """)
             if "1" in sys.stdin.readline():
-                user_id = input("silahkan kau isi username nya?\n").strip()
+                user_id = input("silahkan kamu isi username nya?\n").strip()
             else:
                 user_id = random.choice(bot.read_list_from_file(users_file))
             bot.like_followers(user_id)
@@ -187,7 +187,7 @@ def menu_like():
             2.gunakan username database
             """)
             if "1" in sys.stdin.readline():
-                user_id = input("silahkan kamu isi username nya?\n").strip()
+                user_id = input("silahkan kamu isi username nya yang ingin kamu gunakan akun nya?\n").strip()
             else:
                 user_id = random.choice(bot.read_list_from_file(users_file))
             bot.like_following(user_id)
@@ -214,7 +214,7 @@ def menu_like():
             menu()
 
         else:
-            print("nomor yang barusan kamu masukan salah")
+            print("nomor yang barusan kamu masukan sepertinya salah")
             menu_like()
 
 def menu_setting():
@@ -230,11 +230,11 @@ def menu_setting():
         7. Clear all database
         8. Main menu
         """)
-        ans = input("pengaturan seperti apakah yang ingin kalian rubah???\n").strip()
+        ans = input("pengaturan seperti apakah yang ingin kalian rubah agar kamu nyaman???\n").strip()
 
         if ans == "1":
             parameter_setting()
-            change = input("yakin beneran mau kamu ganti? y/n\n").strip()
+            change = input("yakin beneran mau kamu ganti nih? y/n\n").strip()
             if change == 'y' or change == 'Y':
                 setting_input()
             else:
@@ -251,17 +251,17 @@ def menu_setting():
             whitelist_adder()
         elif ans == "7":
             print(
-                "semua pengaturan sudah di bersihkan atau di reset seperti awal")
+                "semua pengaturan sudah di bersihkan atau di reset seperti awal slahkan gunakan kembali")
             time.sleep(5)
             open(hashtag_file, 'w')
             open(users_file, 'w')
             open(whitelist, 'w')
             open(blacklist, 'w')
-            print("sudah selesai, sekarang anda bisa memasukan nya lagi!")
+            print("sudah selesai, sekarang anda bisa memasukan nya lagi seperti awal")
         elif ans == "8":
             menu()
         else:
-            print("apakah nomor tidak ada di list?")
+            print("apakah nomor yang kamu masukkan tidak ada di list?")
             menu_setting()
 
 # untuk mencocokan input
@@ -318,6 +318,11 @@ bot = Bot(
         'sewa',
         'jastip',
         'art',
+        'viral',
+        'hype',
+        'followergratis',
+        'likegratis',
+        'aman',
         'open'])
 
 bot.login()
